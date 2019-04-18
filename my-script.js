@@ -1,26 +1,30 @@
-fetch("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=e6ef2cde327f46e3820d0344025b79fc")
+const app = document.getElementById('root')
+
+const container = document.createElement('div')
+container.setAttribute('class', 'container')
+
+app.appendChild(container)
+
+fetch("https://randomuser.me/api/?results=10")
 .then((response) => {
   console.log(response)
   return response.json()
 }).then((data) => {
-//Get the author of the first article and log it
-  const allArticles = data.articles
-  const article1 = data.articles[0]
-  const author1 = article1.author //data.articles[0].author
+  const results = data.results
 
-  console.log("allArticles:", allArticles)
-  console.log("article1:", article1)
-  console.log("author1", author1)
+  const card = document.createElement('div')
+  card.setAttribute('class', 'card')
 
-  document.getElementById("firstAuthor").innerHTML = author1
+  results.forEach((item) => {
+    const img = document.createElement('img')
+    img.src = item.picture.large
 
-  allArticles.forEach((item) => {
-    const divElement = document.createElement ("div")
-    divElement.innerHTML = item.description
-    document.getElementById("descriptions").appendChild(divElement)
+    const p = document.createElement('p')
+    p.textContent = item.name.first
+
+    container.appendChild(card)
+    card.appendChild(img)
+    card.appendChild(p)
   })
-
-
-
   console.log(data)
-})
+  })
