@@ -12,19 +12,24 @@ fetch("https://randomuser.me/api/?results=10")
 }).then((data) => {
   const results = data.results
 
-  const card = document.createElement('div')
-  card.setAttribute('class', 'card')
-
   results.forEach((item) => {
+    const card = document.createElement('div')
+    card.setAttribute('class', 'card')
+
     const img = document.createElement('img')
     img.src = item.picture.large
 
+    const h1 = document.createElement('h1')
+    h1.textContent = item.name.first
+
     const p = document.createElement('p')
-    p.textContent = item.name.first
+    p.textContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 
     container.appendChild(card)
     card.appendChild(img)
+    card.appendChild(h1)
     card.appendChild(p)
+
   })
   console.log(data)
   })
