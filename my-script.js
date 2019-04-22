@@ -11,18 +11,18 @@ carousel.setAttribute('class', 'carousel')
 const buttonwrapper = document.createElement('div')
 buttonwrapper.setAttribute('class', 'buttonwrapper')
 
-const slideleft = document.createElement ('div')
+const slideleft = document.createElement ('button')
 slideleft.setAttribute('class', 'slideleft')
 
-const slideright = document.createElement ('div')
+const slideright = document.createElement ('button')
 slideright.setAttribute('class', 'slideright')
 
 container.appendChild(carousel)
-carousel.appendChild(buttonwrapper)
+container.appendChild(buttonwrapper)
 buttonwrapper.appendChild(slideleft)
 buttonwrapper.appendChild(slideright)
 
-fetch("https://randomuser.me/api/?results=10")
+fetch("https://randomuser.me/api/?results=30")
 .then((response) => {
   return response.json()
 }).then((data) => {
@@ -46,5 +46,26 @@ fetch("https://randomuser.me/api/?results=10")
       card.appendChild(h1)
       card.appendChild(p)
 
+      const carouselWidth = carousel.offsetWidth;
+      const cardStyle = card.currentStyle || window.getComputedStyle(card)
+      const cardMarginRight = Number(cardStyle.marginRight.match(/\d+/g)[0]);
+      const cardCount = 30;
+      let offset = 0;
+      const maxX = -((cardCount / 3) * carouselWidth +
+                    (cardMarginRight * (cardCount / 3)) -
+                    carouselWidth - cardMarginRight);
+      slideleft.addEventListener("click", function() {
+        if (offset !== 0) {
+          offset += carouselWidth + cardMarginRight;
+            carousel.style.transform = `translateX(${offset}px)`;
+              }
+            })
+
+      slideright.addEventListener("click", function() {
+        if (offset !== maxX) {
+          offset -= carouselWidth + cardMarginRight;
+            carousel.style.transform = `translateX(${offset}px)`;
+                }
+            })
     })
   })
