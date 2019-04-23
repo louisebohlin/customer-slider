@@ -8,19 +8,21 @@ app.appendChild(container)
 const carousel = document.createElement('div')
 carousel.setAttribute('class', 'carousel')
 
-const buttonwrapper = document.createElement('div')
-buttonwrapper.setAttribute('class', 'buttonwrapper')
+const buttonWrapper = document.createElement('div')
+buttonWrapper.setAttribute('class', 'button-wrapper')
 
-const slideleft = document.createElement ('button')
-slideleft.setAttribute('class', 'slideleft')
+const slideLeft = document.createElement ('img')
+slideLeft.setAttribute('class', 'slide-left')
+slideLeft.src = "https://img.icons8.com/ios-glyphs/25/000000/chevron-left.png"
 
-const slideright = document.createElement ('button')
-slideright.setAttribute('class', 'slideright')
+const slideRight = document.createElement ('img')
+slideRight.setAttribute('class', 'slide-right')
+slideRight.src = "https://img.icons8.com/ios-glyphs/25/000000/chevron-right.png"
 
 container.appendChild(carousel)
-container.appendChild(buttonwrapper)
-buttonwrapper.appendChild(slideleft)
-buttonwrapper.appendChild(slideright)
+container.appendChild(buttonWrapper)
+buttonWrapper.appendChild(slideLeft)
+buttonWrapper.appendChild(slideRight)
 
 fetch("https://randomuser.me/api/?results=30")
 .then((response) => {
@@ -39,7 +41,7 @@ fetch("https://randomuser.me/api/?results=30")
       h1.textContent = item.name.first
 
       const p = document.createElement('p')
-      p.textContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      p.textContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
 
       carousel.appendChild(card)
       card.appendChild(img)
@@ -54,14 +56,14 @@ fetch("https://randomuser.me/api/?results=30")
       const maxX = -((cardCount / 3) * carouselWidth +
                     (cardMarginRight * (cardCount / 3)) -
                     carouselWidth - cardMarginRight);
-      slideleft.addEventListener("click", function() {
+      slideLeft.addEventListener("click", function() {
         if (offset !== 0) {
           offset += carouselWidth + cardMarginRight;
             carousel.style.transform = `translateX(${offset}px)`;
               }
             })
 
-      slideright.addEventListener("click", function() {
+      slideRight.addEventListener("click", function() {
         if (offset !== maxX) {
           offset -= carouselWidth + cardMarginRight;
             carousel.style.transform = `translateX(${offset}px)`;
